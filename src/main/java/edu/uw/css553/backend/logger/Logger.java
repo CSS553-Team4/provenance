@@ -4,7 +4,9 @@ import java.util.Date;
 
 /**
  * The Logger is responsible for recording details from a workflow's execution
- * to persistent storage.
+ * to persistent storage. Logger is stateful and therefore only one workflow may
+ * be logged at a time. If a current log is open it must be terminated before the
+ * next workflow log can begin.
  * @author Mark Cafaro
  */
 
