@@ -17,7 +17,7 @@ public interface Workflow {
      * Remove a specified action from the workflow, given an action
      * @param action : an action object to be removed from the workflow actions
      */
-    public void removeAction(Action action);
+    public void removeAction(Action action) throws WorkflowInstance.NoSuchActionException;
     /**
      * Get a list of the actions that are part of the workflow
      * @return a list of all the action elements in workflow
