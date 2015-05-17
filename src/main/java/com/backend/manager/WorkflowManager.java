@@ -5,11 +5,11 @@ public interface WorkflowManager {
     /**
      * Responsible for saving a workflow to the data store
      */
-    public void addWorkflow( Workflow workflow );
+    public void saveWorkflow( Workflow workflow );
 
     /**
      * Responsible for retrieving all workflows from the data store
      */
-    public List<Workflow> getAvailableWorkflows();
+    public List<Workflow> listAvailableWorkflows();
 
 }
