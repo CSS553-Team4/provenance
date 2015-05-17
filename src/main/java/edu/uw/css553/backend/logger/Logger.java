@@ -1,3 +1,5 @@
+package edu.uw.css553.backend.logger;
+
 import java.util.Date;
 
 /**

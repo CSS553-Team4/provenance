@@ -1,3 +1,7 @@
+package edu.uw.css553.backend.runner;
+
+import edu.uw.css553.backend.entities.Workflow;
+
 /**
  * @author Christina Burnett
  * @version "1.0, 05/16/15"

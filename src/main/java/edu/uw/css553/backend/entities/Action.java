@@ -1,3 +1,4 @@
+package edu.uw.css553.backend.entities;
 
 public interface Action {
 
