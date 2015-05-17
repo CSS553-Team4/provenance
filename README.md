@@ -7,11 +7,13 @@ src
   |-main
   |   |-config
   |   |-java
-  |       |-com
+  |       |-edu.uw.css553
   |           |-backend
-  |               |-interface
+  |               |-entities
   |               |-logger
   |               |-manager
   |               |-runner
+  |           |-frontend
   |-test
+  |  |-java
 ```
