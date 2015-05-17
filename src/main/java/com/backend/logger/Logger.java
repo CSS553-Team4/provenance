@@ -17,7 +17,7 @@ public interface Logger {
      * @param notes Any notes to include with the initialization of the log
      * @return The execution id of the workflow entry
      */
-    int initWorkflowLog(int workflowId, String inputUrl, Date start, String notes);
+    public int initWorkflowLog(int workflowId, String inputUrl, Date start, String notes);
 
     /**
      * Logs the initialization of an action in the workflow.
@@ -28,7 +28,7 @@ public interface Logger {
      * @param start The start time of the action
      * @return The action execution id of the action entry
      */
-    int initAction(int execId, int sequenceNum, String actionUrl, String outputUrl, Date start);
+    public int initAction(int execId, int sequenceNum, String actionUrl, String outputUrl, Date start);
 
     /**
      * Logs the completion of a action in the workflow.
@@ -37,7 +37,7 @@ public interface Logger {
      * @param result ???
      * @param message Any message to include with the termination of the action
      */
-    void terminateAction(int actionId, Date end, Data result, String message);
+    public void terminateAction(int actionId, Date end, Data result, String message);
 
     /**
      * Logs the completion of the workflow, submitting the log entry to the
@@ -47,6 +47,6 @@ public interface Logger {
      * @param result ???
      * @param message Any message to include with the termination of the workflow
      */
-    void terminateWorkflowLog(int execId, Date end, Date result, String message);
+    public void terminateWorkflowLog(int execId, Date end, Date result, String message);
 
 }
