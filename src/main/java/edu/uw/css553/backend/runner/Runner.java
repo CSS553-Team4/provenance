@@ -26,12 +26,11 @@ public class Runner implements RunnerInterface {
             Calendar calendar = Calendar.getInstance();
             String directory = "~"; //TODO this directory should be configured somewhere
             Object inputObject = new Object();
-            inputObject = workflow.getWorkflowInput(); //TODO this must be the input data for the Workflow
+            inputObject = workflow.getWorkflowInput();
             // instantiate the logger
             FileLogger logger = new FileLogger(directory);
             // initialize log for this workflow
-            //TODO Logger expects unique number for Workflow, but Workflow does not supply one
-            logger.initWorkflowLog( 1 , calendar.getTime());
+            logger.initWorkflowLog( workflow.workflowId , calendar.getTime());
             while (i <= actionCount && success == 1) {
                 action = workflow.getActions().get(i);
                 // initialize action
