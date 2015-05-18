@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import edu.uw.css553.backend.entities.Action;
 import edu.uw.css553.backend.entities.Workflow;
-import edu.uw.css553.backend.entities.WorkflowInstance;
 import edu.uw.css553.backend.logger.FileLogger;
 
 /**
@@ -27,7 +26,7 @@ public class Runner implements RunnerInterface {
             Calendar calendar = Calendar.getInstance();
             String directory = "~"; //TODO this directory should be configured somewhere
             Object inputObject = new Object();
-            //inputObject = workflow.getWorkflowInput(); //TODO this must be the input data for the Workflow
+            inputObject = workflow.getWorkflowInput(); //TODO this must be the input data for the Workflow
             // instantiate the logger
             FileLogger logger = new FileLogger(directory);
             // initialize log for this workflow
