@@ -43,12 +43,15 @@ public class Runner implements RunnerInterface {
                 catch (RuntimeException ex) {
                     System.out.println("Runtime exception in step " + i + " of " + workflow.getName());
                     System.out.println(ex.toString());
+                    logger.terminateAction(ex.toString(), calendar.getTime());
                     success = 0;
                 }
                 // terminate action
-                logger.terminateAction(outputObject.toString(), calendar.getTime());
-                // prepare for next action by passing output into next step's input
-                inputObject = outputObject;
+                if (success == 1) {
+                    logger.terminateAction(outputObject.toString(), calendar.getTime());
+                    // prepare for next action by passing output into next step's input
+                    inputObject = outputObject;
+                }
                 i++;
             }
             // terminate workflow
