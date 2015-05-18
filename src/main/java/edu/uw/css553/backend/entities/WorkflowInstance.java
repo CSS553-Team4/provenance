@@ -25,6 +25,7 @@ public class WorkflowInstance implements Workflow {
     private boolean isFileLoc = false;
     private String worflowInput;
     public boolean isWorkflowOpen = false;
+    public int workflowId;
 
     public WorkflowInstance(String name) {
         this.name = name;
