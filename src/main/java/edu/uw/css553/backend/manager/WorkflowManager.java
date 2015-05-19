@@ -1,6 +1,7 @@
 package edu.uw.css553.backend.manager;
 
 import edu.uw.css553.backend.entities.Workflow;
+import java.util.List;
 
 public interface WorkflowManager {
 
