@@ -8,7 +8,7 @@ import edu.uw.css553.backend.logger.FileLogger;
 
 /**
  * @author Christina Burnett
- * @version "1.0, 05/17/15"
+ * @version "1.0, 05/18/15"
  *
  * The Runner class implements the RunnerInterface.
  * This class performs the actions defined in a given workflow, logging each
@@ -24,9 +24,8 @@ public class Runner implements RunnerInterface {
         int actionCount = workflow.getActions().size();
         if (actionCount > 0) {
             Calendar calendar = Calendar.getInstance();
-            String directory = "~"; //TODO this directory should be configured somewhere
-            Object inputObject = new Object();
-            inputObject = workflow.getWorkflowInput();
+            String directory = "c:&#092;provenance"; //TODO this directory should be configured somewhere
+            Object inputObject = workflow.getWorkflowInput();
             // instantiate the logger
             FileLogger logger = new FileLogger(directory);
             // initialize log for this workflow
