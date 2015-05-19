@@ -4,16 +4,16 @@
 The general structure of the project
 ```
 src
-  |-main
-  |   |-config
-  |   |-java
-  |       |-edu.uw.css553
-  |           |-backend
-  |               |-entities
-  |               |-logger
-  |               |-manager
-  |               |-runner
-  |           |-frontend
-  |-test
-  |  |-java
+  ├── main
+  |   ├── config
+  |   └── java
+  |       └── edu.uw.css553
+  |           ├── backend
+  |           |   ├── entities
+  |           |   ├── logger
+  |           |   ├── manager
+  |           |   └── runner
+  |           └── frontend
+  └── test
+      └── java
 ```
