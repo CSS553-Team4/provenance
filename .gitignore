@@ -1,6 +1,7 @@
 # Intellij
 *.idea
 *.iml
+.IntelliJIdea14
 
 # Compiler output
 out/
