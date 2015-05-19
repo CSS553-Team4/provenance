@@ -17,7 +17,7 @@ import edu.uw.css553.backend.logger.FileLogger;
 public class Runner implements RunnerInterface {
     @Override
     public int executeWorkflow (Workflow workflow) {
-        int i = 1;
+        int i = 0;
         int success = 1;
         Action action;
         Object outputObject = new Object();
@@ -31,7 +31,7 @@ public class Runner implements RunnerInterface {
             FileLogger logger = new FileLogger(directory);
             // initialize log for this workflow
             logger.initWorkflowLog( workflow.workflowId , calendar.getTime());
-            while (i <= actionCount && success == 1) {
+            while (i < actionCount && success == 1) {
                 action = workflow.getActions().get(i);
                 // initialize action
                 //TODO Logger expects Action name, but Action does not supply one
