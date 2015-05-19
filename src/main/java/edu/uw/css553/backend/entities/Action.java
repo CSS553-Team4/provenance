@@ -1,5 +1,7 @@
 package edu.uw.css553.backend.entities;
 
+import java.util.Map;
+
 public interface Action {
 
     /**
