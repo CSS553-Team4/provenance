@@ -10,8 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * A simple Logger implementation that writes log files to a specified local
- * directory. Each initialized workflow creates a separate log.
+ * A Logger implementation that writes log files to a specified local directory.
+ * Each initialized workflow creates a separate log file in the directory.
  */
 public class FileLogger implements Logger {
 

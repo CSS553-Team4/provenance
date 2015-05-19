@@ -11,6 +11,15 @@ public interface Action {
      */
     public Object execute( Object input );  // Need type check on input data type
 
+    /**
+     * Set the parameters to modify the action's execution.
+     * @param params A map of the parameters
+     */
     public void setParameters( Map<String, Object> params );
+
+    /**
+     * @return The display name of the action.
+     */
+    public String getName();
 
 }
