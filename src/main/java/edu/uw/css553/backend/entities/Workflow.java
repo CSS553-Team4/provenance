@@ -6,13 +6,14 @@ package edu.uw.css553.backend.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 /**
  * An implementation of the workflow interface
  *
  * @author Zulqurnain Hussain
  */
-public class Workflow implements WorkflowInterface {
+public class Workflow implements WorkflowInterface, Serializable {
 
     public class NoSuchActionException extends Exception {
 
