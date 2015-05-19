@@ -15,6 +15,17 @@ import edu.uw.css553.backend.logger.FileLogger;
  * action via the Logger class.
  */
 public class Runner implements RunnerInterface {
+    //TODO this default directory should be configured somewhere
+    private String logDirectory = "c:&#092;provenance";
+
+    public String getLogDirectory() {
+        return logDirectory;
+    }
+
+    public void setLogDirectory(String logDirectory) {
+        this.logDirectory = logDirectory;
+    }
+
     @Override
     public int executeWorkflow (Workflow workflow) {
         int i = 0;
@@ -24,10 +35,9 @@ public class Runner implements RunnerInterface {
         int actionCount = workflow.getActions().size();
         if (actionCount > 0) {
             Calendar calendar = Calendar.getInstance();
-            String directory = "c:&#092;provenance"; //TODO this directory should be configured somewhere
             Object inputObject = workflow.getWorkflowInput();
             // instantiate the logger
-            FileLogger logger = new FileLogger(directory);
+            FileLogger logger = new FileLogger(logDirectory);
             // initialize log for this workflow
             logger.initWorkflowLog( workflow.workflowId , calendar.getTime());
             while (i < actionCount && success == 1) {
@@ -51,7 +61,7 @@ public class Runner implements RunnerInterface {
                     // prepare for next action by passing output into next step's input
                     inputObject = outputObject;
                 }
-                i++;
+                i++; // next action
             }
             // terminate workflow
             logger.terminateWorkflowLog(outputObject.toString(), calendar.getTime());
