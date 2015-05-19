@@ -1,5 +1,12 @@
 # CSS-553, Assignment 3: Provenance Implementation
 
+This project is built using the Java 1.7 SDK.
+
+## Dependencies
+- [groovy-all-2.4.3-indy.jar](http://repo1.maven.org/maven2/org/codehaus/groovy/groovy-all/2.4.3/) is required for GroovyAction.java
+- junit-4.11.jar is required for the junit tests
+- hamcrest-core-1.3.jar is required for the junit tests
+
 ## Project Structure
 The general structure of the project
 ```
