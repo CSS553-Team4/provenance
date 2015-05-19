@@ -65,6 +65,7 @@ public class WorkflowManagerImpl implements WorkflowManager {
         } catch ( Exception e ) {
             System.out.println( "There was an error accessing the directory you provided. " +
                 "Please try again." );
+            if ( DEBUG ) { e.printStackTrace(); }
         }
 
         return result;
