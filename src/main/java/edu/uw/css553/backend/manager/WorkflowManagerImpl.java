@@ -1,8 +1,22 @@
 package edu.uw.css553.backend.manager;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+
 public class WorkflowManagerImpl implements WorkflowManager {
 
     private final String WORKFLOW_DIR = "~/";   // how to account for OS? pending final path decision.
+    private final String FILENAME_PATTERN = ".*\\.wfl";
     private final boolean DEBUG = false;        // 'true' to print debug statements
 
     public WorkflowManagerImpl() {
@@ -17,7 +31,7 @@ public class WorkflowManagerImpl implements WorkflowManager {
             oos.close();
             System.out.println( "Finished saving workflow "+ workflow.getName() +
                 " to directory " + WORKFLOW_DIR );
-        } catch ( Exception e ) {
+        } catch ( IOException e ) {
             System.out.println( "There was an error saving the workflow. Please try again." );
             if ( DEBUG ) { e.printStackTrace(); }
         }
@@ -39,13 +53,14 @@ public class WorkflowManagerImpl implements WorkflowManager {
                 "Please check that the provided path is correct." );
             System.out.println( "Requested path: " + path );
             if ( DEBUG ) { fnfe.printStackTrace(); }
-        } catch ( Exception e ) {
-            if ( DEBUG ) { e.printStackTrace(); }
         }
 
         return workflow;
     }
 
+    /**
+     *  Very rigid search; does not recurse through subdirectories.
+     */
     public List<Workflow> listAvailableWorkflows( String directory ) {
         // TODO: File path validation
 
@@ -57,12 +72,12 @@ public class WorkflowManagerImpl implements WorkflowManager {
 
             for ( int i = 0; i < listOfFiles.length; i++ ) {
                 File file = listOfFiles[i];
-                if ( file.isFile() && file.matches( ".*\\.wfl" ) ) {
+                if ( file.isFile() && file.matches( FILENAME_PATTERN ) ) {
                     result.add( openWorkflow( file.getAbsolutePath() ) );
                     if ( DEBUG ) { System.out.println( "Adding file: " + file.getName() ); }
                 }
             }
-        } catch ( Exception e ) {
+        } catch ( IOException e ) {
             System.out.println( "There was an error accessing the directory you provided. " +
                 "Please try again." );
             if ( DEBUG ) { e.printStackTrace(); }
