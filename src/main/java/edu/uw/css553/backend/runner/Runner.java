@@ -27,7 +27,7 @@ public class Runner implements RunnerInterface {
     }
 
     @Override
-    public int executeWorkflow (Workflow workflow) {
+    public Object executeWorkflow (Workflow workflow) {
         int i = 0;
         int success = 1;
         Action action;
@@ -66,7 +66,6 @@ public class Runner implements RunnerInterface {
             // terminate workflow
             logger.terminateWorkflowLog(outputObject.toString(), calendar.getTime());
         }
-        return success;
+        return outputObject;
     }
 }
-
