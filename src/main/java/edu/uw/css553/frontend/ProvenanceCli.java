@@ -95,22 +95,31 @@ public class ProvenanceCli {
             } else if (choice.matches("[Aa]dd") == true) {
                 boolean modifyWorkflow = true;
                 while (modifyWorkflow) {
-                    System.out.println("Enter the number for the action you wish to add to the workflow:");
-                    for (int i = 0; i < actions.size(); i++) {
-                        System.out.println(i + " " + actions.get(i).getName());
-                    }
-                    int num = in.nextInt();
-                    if (num >= actions.size()) {
-                        System.out.print("Invalid action choice");
-                        continue;
-                    }
-                    workflow.addAction(actions.get(num));
+//                    System.out.println("Enter the number for the action you wish to add to the workflow:");
+//                    for (int i = 0; i < actions.size(); i++) {
+//                        System.out.println(i + " " + actions.get(i).getName());
+//                    }
+//                    int num = in.nextInt();
+//                    in.nextLine();
+//                    if (num >= actions.size()) {
+//                        System.out.print("Invalid action choice");
+//                        continue;
+//                    }
+                    GroovyAction ga = new GroovyAction();
+                    
+                    System.out.println("Enter in the scriptText parameters");
+                    Map<String, Object> params = new HashMap<>();
+                    String tmp = in.nextLine();
+                    params.put("scriptText", tmp);
+                    
+                    ga.setParameters(params);
+                    workflow.addAction(ga);
+
                     System.out.print("Actions in " + workflow.getName() + " ");
                     for (Action e : workflow.getActions()) {
                         System.out.print(e.getName() + " ");
                     }
                     System.out.println("\nAre you done adding to the workflow y|n: ");
-                    in.nextLine(); //nextInt doesn't read nextline so we have to call nextline twice in order for the first one to be consumed
                     String choice1 = in.nextLine();
                     if (choice1.matches("[Yy].*") == true) {
                         break;
@@ -145,7 +154,12 @@ public class ProvenanceCli {
                     }
                 }
             } else if(choice.matches("[Ee]xecute")){
-                run.executeWorkflow(workflow);
+                System.out.println("Enter in the workflow input");
+                String input = in.nextLine();
+                workflow.setWorkflowInput(input, false);
+                Object o = run.executeWorkflow(workflow);
+                System.out.println(o);
+                
             } else if(choice.matches("[Ss]ave") == true){
                 System.out.println("Attempting to save workflow...");
                 manager.saveWorkflow(workflow);
@@ -169,5 +183,6 @@ public class ProvenanceCli {
         return actions;
     }
 }
+
 
 
