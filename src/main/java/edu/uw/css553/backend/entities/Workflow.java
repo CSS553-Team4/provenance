@@ -96,7 +96,7 @@ public class Workflow implements WorkflowInterface, Serializable {
      */
     @Override
     public void setWorkflowInput(String input, boolean isFile) {
-        this.name = input;
+        this.worflowInput = input;
         this.isFileLoc = isFile;
     }
 
