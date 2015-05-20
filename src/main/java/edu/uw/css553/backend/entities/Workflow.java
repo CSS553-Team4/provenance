@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.uw.css553.backend.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 /**
  * An implementation of the workflow interface
@@ -103,6 +100,17 @@ public class Workflow implements WorkflowInterface, Serializable {
         this.isFileLoc = isFile;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Workflow))
+            return false;
+        if(obj == this)
+            return true;
+        Workflow rhs = (Workflow)obj;
+        return new EqualsBuilder().append(name, rhs.name).isEquals();
+    }
+    
+    
     public boolean isInputFile() {
         return this.isFileLoc;
     }
