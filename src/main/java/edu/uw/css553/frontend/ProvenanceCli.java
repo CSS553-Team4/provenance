@@ -28,7 +28,8 @@ public class ProvenanceCli {
         Workflow work;
         WorkflowManagerImpl manager = new WorkflowManagerImpl();
         Runner run = new Runner();
-
+        run.setLogDirectory(System.getProperty("user.dir"));
+        
         System.out.println("Welcome to CSS 553 Provenance tool");
         System.out.println("Type 'quit' to exit the program");
         System.out.println("Type 'help' to get a full list of available commands");
@@ -168,4 +169,5 @@ public class ProvenanceCli {
         return actions;
     }
 }
+
 
