@@ -39,7 +39,10 @@ public class Workflow implements WorkflowInterface, Serializable {
     public void addAction(Action action) {
         this.actions.add(action);
     }
-
+    
+    public void addAction(Action action, int index){
+        this.actions.add(index, action);
+    }
     /**
      * Get a list of the actions that are part of the workflow
      *
