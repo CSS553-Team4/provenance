@@ -19,5 +19,5 @@ public interface RunnerInterface {
     * @param workflow An instance of a Workflow
     * @return int The return code of the last action executed in the workflow.
     */
-    public abstract int executeWorkflow (Workflow workflow);
+    public abstract Object executeWorkflow (Workflow workflow);
 }

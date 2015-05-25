@@ -43,8 +43,7 @@ public class Runner implements RunnerInterface {
             while (i < actionCount && success == 1) {
                 action = workflow.getActions().get(i);
                 // initialize action
-                //TODO Logger expects Action name, but Action does not supply one
-                logger.initAction(action.toString(), calendar.getTime());
+                logger.initAction(action.getName(), calendar.getTime());
                 try {
                     // execute action
                     outputObject = action.execute(inputObject);
