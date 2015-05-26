@@ -1,5 +1,7 @@
 package edu.uw.css553.backend.manager;
 
+import edu.uw.css553.backend.entities.Workflow;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,64 +25,85 @@ public class WorkflowManagerImpl implements WorkflowManager {
         // Empty constructor
     }
 
-    public void saveWorkflow( Workflow workflow ) {
+    @Override
+    public void saveWorkflow(Workflow workflow) {
         try {
-            FileOutputStream out = new FileOutputStream( WORKFLOW_DIR + "/" + workflow.getName() + ".wfl" );
-            ObjectOutputStream oos = new ObjectOutputStream( out );
-            oos.writeObject( workflow );
+            FileOutputStream out = new FileOutputStream(WORKFLOW_DIR + "/" + workflow.getName() + ".wfl");
+            ObjectOutputStream oos = new ObjectOutputStream(out);
+            oos.writeObject(workflow);
             oos.close();
-            System.out.println( "Finished saving workflow "+ workflow.getName() +
-                " to directory " + WORKFLOW_DIR );
-        } catch ( IOException e ) {
-            System.out.println( "There was an error saving the workflow. Please try again." );
-            if ( DEBUG ) { e.printStackTrace(); }
+            System.out.println("Finished saving workflow " + workflow.getName() +
+                    " to directory " + WORKFLOW_DIR);
+        } catch (IOException e) {
+            System.out.println("There was an error saving the workflow. Please try again.");
+            if (DEBUG) {
+                e.printStackTrace();
+            }
         }
 
     }
 
-    public Workflow openWorkflow( String path ) {
+    @Override
+    public Workflow openWorkflow(String path) {
         // TODO: File path validation
 
         Workflow workflow = null;
 
         try {
-            FileInputStream in = new FileInputStream( path );
-            ObjectInputStream ois = new ObjectInputStream( in );
-            workflow = ( Workflow ) ois.readObject();
+            FileInputStream in = new FileInputStream(path);
+            ObjectInputStream ois = new ObjectInputStream(in);
+            workflow = (Workflow) ois.readObject();
             ois.close();
-        } catch ( FileNotFoundException fnfe ) {
-            System.out.println( "There was an error opening the file you specified. " +
-                "Please check that the provided path is correct." );
-            System.out.println( "Requested path: " + path );
-            if ( DEBUG ) { fnfe.printStackTrace(); }
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("There was an error opening the file you specified. " +
+                    "Please check that the provided path is correct.");
+            System.out.println("Requested path: " + path);
+            if (DEBUG) {
+                fnfe.printStackTrace();
+            }
+        } catch (IOException ioe) {
+            //TODO IOException
+            if (DEBUG) {
+                ioe.printStackTrace();
+            }
+        } catch (ClassNotFoundException cnfe) {
+            //TODO ClassNotFoundException
+            if (DEBUG) {
+                cnfe.printStackTrace();
+            }
         }
 
-        return workflow;
-    }
+    return workflow;
+}
 
     /**
-     *  Very rigid search; does not recurse through subdirectories.
+     * Very rigid search; does not recurse through subdirectories.
      */
-    public List<Workflow> listAvailableWorkflows( String directory ) {
+    @Override
+    public List<Workflow> listAvailableWorkflows(String directory) {
         // TODO: File path validation
 
         ArrayList<Workflow> result = new ArrayList<Workflow>();
 
         try {
-            File folder = new File( directory );
+            File folder = new File(directory);
             File[] listOfFiles = folder.listFiles();
 
-            for ( int i = 0; i < listOfFiles.length; i++ ) {
+            for (int i = 0; i < listOfFiles.length; i++) {
                 File file = listOfFiles[i];
-                if ( file.isFile() && file.matches( FILENAME_PATTERN ) ) {
-                    result.add( openWorkflow( file.getAbsolutePath() ) );
-                    if ( DEBUG ) { System.out.println( "Adding file: " + file.getName() ); }
+                if (file.isFile() && file.getAbsolutePath().matches(FILENAME_PATTERN)) {
+                    result.add(openWorkflow(file.getAbsolutePath()));
+                    if (DEBUG) {
+                        System.out.println("Adding file: " + file.getName());
+                    }
                 }
             }
-        } catch ( IOException e ) {
-            System.out.println( "There was an error accessing the directory you provided. " +
-                "Please try again." );
-            if ( DEBUG ) { e.printStackTrace(); }
+        } catch (Exception e) {
+            System.out.println("There was an error accessing the directory you provided. " +
+                    "Please try again.");
+            if (DEBUG) {
+                e.printStackTrace();
+            }
         }
 
         return result;

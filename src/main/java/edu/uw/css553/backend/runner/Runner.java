@@ -1,10 +1,14 @@
 package edu.uw.css553.backend.runner;
 
+import edu.uw.css553.backend.entities.ActionInterface;
+import edu.uw.css553.backend.entities.WorkflowInterface;
+import edu.uw.css553.backend.logger.FileLogger;
+
 import java.util.Calendar;
 
 import edu.uw.css553.backend.entities.Action;
 import edu.uw.css553.backend.entities.Workflow;
-import edu.uw.css553.backend.logger.FileLogger;
+
 
 /**
  * @author Christina Burnett
@@ -30,7 +34,7 @@ public class Runner implements RunnerInterface {
     public Object executeWorkflow (Workflow workflow) {
         int i = 0;
         int success = 1;
-        Action action;
+        ActionInterface action;
         Object outputObject = new Object();
         int actionCount = workflow.getActions().size();
         if (actionCount > 0) {
@@ -45,7 +49,7 @@ public class Runner implements RunnerInterface {
                 // initialize action
                 logger.initAction(action.getName(), calendar.getTime());
                 try {
-                    // execute action
+                     // execute action
                     outputObject = action.execute(inputObject);
                 }
                 catch (RuntimeException ex) {

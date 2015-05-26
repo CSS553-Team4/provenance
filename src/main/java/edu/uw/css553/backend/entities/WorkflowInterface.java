@@ -7,7 +7,7 @@ import java.util.List;
  * tion of the workflow object itself
  * @author Zulqurnain Hussain
  */
-public interface WorkflowInterface {
+public interface WorkflowInterface extends EntityInterface {
     /**
      * Add an action to the workflow
      * @param action : an action to be added to the workflow

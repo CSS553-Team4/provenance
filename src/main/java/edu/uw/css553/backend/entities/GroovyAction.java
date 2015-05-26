@@ -20,9 +20,13 @@ import java.util.Map;
  *
  * assertEquals(result, "HELLO WORLD!");
  */
-public class GroovyAction implements Action {
+public class GroovyAction extends Action {
 
     String scriptText;
+
+    GroovyAction () {
+        name = "Groovy";
+    }
 
     /**
      * Evaluates the groovy script text and returns the result. The input is
@@ -30,7 +34,6 @@ public class GroovyAction implements Action {
      * @param input
      * @return
      */
-    @Override
     public Object execute(Object input) {
         Binding data = new Binding();
         data.setProperty("input", input);
@@ -44,17 +47,11 @@ public class GroovyAction implements Action {
      * ignored.
      * @param params A map of the parameters
      */
-    @Override
     public void setParameters(Map<String, Object> params) {
         if (!params.containsKey("scriptText")) {
             throw new IllegalArgumentException("Params must contain a scriptText key");
         }
         scriptText = (String)params.get("scriptText");
-    }
-
-    @Override
-    public String getName() {
-        return "Groovy";
     }
 
 }

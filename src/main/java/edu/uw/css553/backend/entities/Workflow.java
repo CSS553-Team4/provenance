@@ -1,15 +1,22 @@
 package edu.uw.css553.backend.entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+
+import javax.persistence.Id;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  * An implementation of the workflow interface
  *
  * @author Zulqurnain Hussain
  */
+@Entity
 public class Workflow implements WorkflowInterface, Serializable {
 
     public class NoSuchActionException extends Exception {
@@ -18,12 +25,30 @@ public class Workflow implements WorkflowInterface, Serializable {
             super(message);
         }
     }
+    @Basic
     private String name;
+    @OneToMany
     private ArrayList<Action> actions;
     private boolean isFileLoc = false;
-    private String worflowInput;
+    @Basic
+    private String workflowInput;
     public boolean isWorkflowOpen = false;
+    @Basic
     public int workflowId;
+    @Id
+    private String id;
+    @Basic
+    private String createdBy;
+    @Basic
+    private Timestamp creationTime;
+    @Basic
+    private String modifiedBy;
+    @Basic
+    private Timestamp modificationTime;
+    @Basic
+    private int version;
+
+    public Workflow() {}
 
     public Workflow(String name) {
         this.name = name;
@@ -99,7 +124,7 @@ public class Workflow implements WorkflowInterface, Serializable {
      */
     @Override
     public void setWorkflowInput(String input, boolean isFile) {
-        this.worflowInput = input;
+        this.workflowInput = input;
         this.isFileLoc = isFile;
     }
 
@@ -119,6 +144,37 @@ public class Workflow implements WorkflowInterface, Serializable {
     }
 
     public String getWorkflowInput() {
-        return this.worflowInput;
+        return this.workflowInput;
     }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    @Override
+    public Timestamp getCreationTime() {
+        return creationTime;
+    }
+
+    @Override
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
+
+    @Override
+    public Timestamp getModificationTime() {
+        return modificationTime;
+    }
+
+    @Override
+    public int getVersion() {
+        return version;
+    }
+
 }

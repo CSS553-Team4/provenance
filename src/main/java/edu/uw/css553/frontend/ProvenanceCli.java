@@ -1,18 +1,18 @@
 package edu.uw.css553.frontend;
 
-import edu.uw.css553.backend.entities.Action;
-import edu.uw.css553.backend.entities.GroovyAction;
-import edu.uw.css553.backend.entities.Workflow;
-import edu.uw.css553.backend.manager.WorkflowManager;
+import edu.uw.css553.backend.entities.*;
 import edu.uw.css553.backend.manager.WorkflowManagerImpl;
 import edu.uw.css553.backend.runner.Runner;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.internal.SessionFactoryImpl;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Scanner;
-import java.util.UUID;
 
 /**
  * CSS 553 command line interface
@@ -21,9 +21,24 @@ import java.util.UUID;
  * @author Zulqurnain Hussain
  */
 public class ProvenanceCli {
-
+    private static SessionFactory factory;
     public static void main(String[] args) {
         boolean quitProgram = false;
+
+        Configuration cfg = new Configuration();
+        cfg.addResource("Action.hbm.xml");
+        cfg.addResource("Workflow.hbm.xml");
+        cfg.addResource("ExecutionLog.hbm.xml");
+        cfg.addResource("LogStep.hbm.xml");
+        cfg.setProperties(System.getProperties());
+
+        try {
+            factory = cfg.buildSessionFactory();
+        }
+        catch (Throwable ex) {
+            System.err.println("Failed to create sessionFactory object." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
         Scanner in = new Scanner(System.in);
         Workflow work;
         WorkflowManagerImpl manager = new WorkflowManagerImpl();
@@ -35,7 +50,7 @@ public class ProvenanceCli {
         System.out.println("Type 'help' to get a full list of available commands");
         //TODO: Implement workflow creation, saving, and execution
         //-Actions
-        //TODO: Implement lisiting 
+        //TODO: Implement listing
 
         while (!quitProgram) {
             System.out.println("---Main Menu---");
@@ -82,7 +97,7 @@ public class ProvenanceCli {
 
     public static void editWorkflow(Scanner in, Workflow workflow, WorkflowManagerImpl manager, Runner run) {
         workflow.isWorkflowOpen = true;
-        List<Action> actions = ProvenanceCli.getActions();
+        List<Action> actions = workflow.getActions();
         while (true) {
             System.out.println("'save' - saves the workflow\n"
                     + "'execute' - executes the workflow\n"
@@ -105,18 +120,21 @@ public class ProvenanceCli {
 //                        System.out.print("Invalid action choice");
 //                        continue;
 //                    }
-                    GroovyAction ga = new GroovyAction();
+                    Action ga = new Action();
                     
                     System.out.println("Enter in the scriptText parameters");
-                    Map<String, Object> params = new HashMap<>();
+                    List<WorkflowParameter> params = new ArrayList<WorkflowParameter>();
                     String tmp = in.nextLine();
-                    params.put("scriptText", tmp);
-                    
+                    WorkflowParameter param = new WorkflowParameter();
+                    param.setName("scriptText");
+                    param.setValue(tmp);
+                    params.add(param);
+
                     ga.setParameters(params);
                     workflow.addAction(ga);
 
                     System.out.print("Actions in " + workflow.getName() + " ");
-                    for (Action e : workflow.getActions()) {
+                    for (ActionInterface e : workflow.getActions()) {
                         System.out.print(e.getName() + " ");
                     }
                     System.out.println("\nAre you done adding to the workflow y|n: ");
@@ -171,17 +189,19 @@ public class ProvenanceCli {
 
     }
 
-    public static List<Action> getActions() {
-        List<Action> actions = new ArrayList<>();
+/*
+    public static List<ActionInterface> getActions() {
+        List<ActionInterface> actions = new ArrayList<ActionInterface>();
         //For sake of trying to get this project done, we hard coded the actions
-        GroovyAction action = new GroovyAction();
-        Map<String, Object> params = new HashMap<>();
+        ActionInterface action = new GroovyAction();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put("scriptText", "input.toUpperCase()");
         action.setParameters(params);
         
         actions.add(action);
         return actions;
     }
+*/
 }
 
 
