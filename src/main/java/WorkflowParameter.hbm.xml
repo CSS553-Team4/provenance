@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="edu.uw.css553.backend.entities.WorkflowParameter" table="stepparameter">
+        <id name="id" type="string" column="StepParmId"/>
+        <property name="name" type="string" column="ParameterName" />
+        <property name="dataType" type="string" column="ParameterDataType" />
+        <property name="value" type="string" column="ParameterValue" />
+        <property name="sequence" type="integer" column="ParameterSequence"/>
+        <property name="description" type="string" column="ParameterDescription"/>
+        <property name="createdBy" type="string" column="CreatedBy"/>
+        <property name="creationTime" type="timestamp" column="CreationTime"/>
+        <property name="modifiedBy" type="string" column="ModifiedBy"/>
+        <property name="modificationTime" type="timestamp" column="ModificationTime"/>
+        <property name="version" type="integer" column="Version"/>
+    </class>
+</hibernate-mapping>
