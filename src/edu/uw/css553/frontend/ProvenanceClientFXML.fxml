@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import eu.mihosoft.vrl.workflow.fx.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.uw.css553.frontend.ProvenanceClientFXMLController">
+   <top>
+      <AnchorPane minWidth="-Infinity" prefHeight="53.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToolBar layoutY="25.0" prefHeight="40.0" prefWidth="800.0">
+              <items>
+                <Button fx:id="OpenWorkflowButton" mnemonicParsing="false" onAction="#openWorkflow" text="Open" />
+                  <Button fx:id="SaveWorkflowButton" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#saveWorkflow" text="Save" />
+                  <Button fx:id="ExecuteWorkflowButton" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" text="Execute" />
+              </items>
+            </ToolBar>
+            <MenuBar prefHeight="25.0" prefWidth="800.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem fx:id="OpenWorkflow" mnemonicParsing="false" onAction="#openWorkflow" text="Open" />
+                        <MenuItem fx:id="SaveWorkflow" mnemonicParsing="false" onAction="#saveWorkflow" text="Save" />
+                        <MenuItem fx:id="CloseProgram" mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem fx:id="ExecuteWorkflow" mnemonicParsing="false" text="Execute Workflow" />
+                        <MenuItem fx:id="DeleteAction" mnemonicParsing="false" onAction="#onActionDeleteWorkflowActionNodes" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem fx:id="AboutProgram" mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <ListView fx:id="ActionList" onDragDetected="#onDragDetectedActionList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <ScrollPane hbarPolicy="NEVER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="WorkflowFlowPane" onDragDropped="#onDragDroppedWorkflowPane" onDragOver="#onDragOverWorkflowFlowPane" prefHeight="536.0" prefWidth="599.0" spacing="10.0" />
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
