@@ -3,7 +3,9 @@ package edu.uw.css553.backend.entities;
 import javax.persistence.Id;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,7 +50,8 @@ public class Action implements ActionInterface {
     private Timestamp modificationTime;
     @Basic
     private int version;
-    protected Map<String, Object> params;
+    @OneToMany
+    protected List<WorkflowParameter> params;
 
     /**
      * Evaluates the command and returns the result. The input is
@@ -93,7 +96,7 @@ public class Action implements ActionInterface {
         return outputURL;
     }
 
-    public Map<String, Object> getParameters() {
+    public List<WorkflowParameter> getParameters() {
         return params;
     }
 
@@ -154,7 +157,7 @@ public class Action implements ActionInterface {
      * @param params A map of the parameters
      */
     @Override
-    public void setParameters(Map<String, Object> params) {
+    public void setParameters(List<WorkflowParameter> params) {
         this.params = params;
     }
 

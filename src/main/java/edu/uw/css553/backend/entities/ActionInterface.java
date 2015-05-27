@@ -1,6 +1,6 @@
 package edu.uw.css553.backend.entities;
 
-import java.util.Map;
+import java.util.List;
 
 public interface ActionInterface extends EntityInterface {
 
@@ -15,7 +15,7 @@ public interface ActionInterface extends EntityInterface {
      * Set the parameters to modify the action's execution.
      * @param params A map of the parameters
      */
-    public void setParameters( Map<String, Object> params );
+    public void setParameters( List<WorkflowParameter> params );
 
     /**
      * @return The display name of the action.
