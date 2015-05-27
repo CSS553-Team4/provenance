@@ -3,6 +3,7 @@
 This project is built using the Java 1.7 SDK.
 
 ## Dependencies
+- [hibernate-core-4.3.10.Final.jar](http://mvnrepository.com/artifact/org.hibernate/hibernate-core/4.3.10.Final) is required for ORM
 - [commons-lang3-3.4-javadoc.jar](https://commons.apache.org/proper/commons-lang/download_lang.cgi) is used for ease of overriding core java object methods
 - [groovy-all-2.4.3-indy.jar](http://repo1.maven.org/maven2/org/codehaus/groovy/groovy-all/2.4.3/) is required for GroovyAction.java
 - junit-4.11.jar is required for the junit tests
