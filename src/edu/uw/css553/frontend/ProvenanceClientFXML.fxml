@@ -19,7 +19,7 @@
               <items>
                 <Button fx:id="OpenWorkflowButton" mnemonicParsing="false" onAction="#openWorkflow" text="Open" />
                   <Button fx:id="SaveWorkflowButton" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#saveWorkflow" text="Save" />
-                  <Button fx:id="ExecuteWorkflowButton" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" text="Execute" />
+                  <Button fx:id="ExecuteWorkflowButton" layoutX="60.0" layoutY="13.0" mnemonicParsing="false" onAction="#onActionExecuteWorkflow" text="Execute" />
               </items>
             </ToolBar>
             <MenuBar prefHeight="25.0" prefWidth="800.0">
@@ -33,7 +33,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem fx:id="ExecuteWorkflow" mnemonicParsing="false" text="Execute Workflow" />
+                    <MenuItem fx:id="ExecuteWorkflow" mnemonicParsing="false" onAction="#onActionExecuteWorkflow" text="Execute Workflow" />
                         <MenuItem fx:id="DeleteAction" mnemonicParsing="false" onAction="#onActionDeleteWorkflowActionNodes" text="Delete" />
                   </items>
                 </Menu>

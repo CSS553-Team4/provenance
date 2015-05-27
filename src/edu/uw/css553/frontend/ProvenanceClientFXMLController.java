@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Optional;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -25,11 +26,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -45,6 +48,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -107,10 +111,50 @@ public class ProvenanceClientFXMLController {
         populateActionList();
 
     }
-    
+    /**
+     * Executes the given workflow
+     * @param event 
+     */
+    @FXML
+    void onActionExecuteWorkflow(ActionEvent event){
+        if(workflow == null){
+            saveWorkflow(event);
+        }
+        TextInputDialog dialog = new TextInputDialog("Test Input");
+        dialog.setTitle("Enter in workflow input");
+        dialog.setContentText("Workflow Input: ");
+        Optional<String> result = dialog.showAndWait();
+        if(result.isPresent()){
+            DirectoryChooser chooser = new DirectoryChooser();
+            chooser.setTitle("Choose logging directory");
+            File f = chooser.showDialog(new Stage());
+            if(f == null){
+                return;
+            }
+            System.out.println(f.getPath());
+            run.setLogDirectory(f.getPath());
+            workflow.setWorkflowInput(result.get(), false);
+            System.out.println(result.get());
+            Object o = run.executeWorkflow(workflow);
+            System.out.println(o);
+        }
+        event.consume();
+    }
+    /**
+     * Delete a selected workflow item
+     * @param event 
+     */
     @FXML
     void onActionDeleteWorkflowActionNodes(ActionEvent event){
         if(holder[0] != null){
+            if(workflow != null){
+                try {
+                    workflow.removeAction(holder[0].getAction());
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
+            }
             WorkflowFlowPane.getChildren().remove(holder[0].getStackPane());
             WorkflowActionNodes.remove(holder[0]);
             holder[0] = null;
@@ -186,6 +230,10 @@ public class ProvenanceClientFXMLController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Workflow File");
         File f = fileChooser.showOpenDialog(new Stage());
+        if(f==null){
+            event.consume();
+            return;
+        }
         workflow = manager.openWorkflow(f.getPath());
         List<Action> workflowAction = workflow.getActions();
         for(Action e : workflowAction){
@@ -200,24 +248,37 @@ public class ProvenanceClientFXMLController {
             WorkflowFlowPane.getChildren().add(rect.getStackPane());
         }
     }
-    
+    /**
+     * Saves a workflow to a given location
+     * @param event 
+     */
     @FXML
     void saveWorkflow(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFiler = new 
-            FileChooser.ExtensionFilter("WFL files (*.wfl)", "*.wfl");
+        FileChooser.ExtensionFilter extFiler = new FileChooser.ExtensionFilter("WFL files (*.wfl)", "*.wfl");
         fileChooser.getExtensionFilters().add(extFiler);
         File file = fileChooser.showSaveDialog(new Stage());
+        if(file==null){
+            event.consume();
+            return;
+        }
         System.out.println(file.getName());
         String name = file.getName().replaceAll("\\..*", "");
-        if(workflow == null){
-            workflow = new Workflow(name);
-            for(Object r : WorkflowActionNodes){
-                RectangleActionNodeHelper rect = (RectangleActionNodeHelper)r;
-                workflow.addAction(rect.getAction());
-            }
+        workflow = new Workflow(name);
+        for (Object r : WorkflowActionNodes) {
+            RectangleActionNodeHelper rect = (RectangleActionNodeHelper) r;
+            workflow.addAction(rect.getAction());
+        }
+        if(workflow.getActions().size() ==0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Action Values Error");
+            alert.setHeaderText("Actions are not filled in, using default values");
+            alert.showAndWait();
+            event.consume();
+            return;
         }
         manager.saveWorkflow(workflow, file.getPath());
+        
     }
     
     /**
