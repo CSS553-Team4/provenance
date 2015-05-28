@@ -244,7 +244,7 @@ public class ProvenanceClientFXMLController {
                 WorkflowParameter wP = (WorkflowParameter)iter.next();
                 rect.setTextFieldInput(wP.getName(), wP.getValue());
             }
-            WorkflowActionNodes.add(e);
+            WorkflowActionNodes.add(rect);
             WorkflowFlowPane.getChildren().add(rect.getStackPane());
         }
     }
