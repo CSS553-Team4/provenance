@@ -3,7 +3,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-    <session-factory>
+    <session-factory name="factory">
         <property name="hibernate.dialect">
             org.hibernate.dialect.MySQLDialect
         </property>
@@ -11,10 +11,10 @@
             com.mysql.jdbc.Driver
         </property>
 
-        <!-- Assume test is the database name -->
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost/provenance
+            jdbc:mysql://localhost:3542/provenance
         </property>
+        <property name="hibernate.connection.datasource">MySQL-provenance@localhost</property>
         <property name="hibernate.connection.username">
             provenance_usr
         </property>
@@ -26,7 +26,12 @@
         <mapping class="edu.uw.css553.backend.entities.Action" resource="Action.hbm.xml"/>
         <mapping class="edu.uw.css553.backend.entities.ExecutionLog" resource="ExecutionLog.hbm.xml"/>
         <mapping class="edu.uw.css553.backend.entities.LogStep" resource="LogStep.hbm.xml"/>
+        <mapping class="edu.uw.css553.backend.entities.LogParameter" resource="LogParameter.hbm.xml"/>
+        <mapping class="edu.uw.css553.backend.entities.Project" resource="Project.hbm.xml"/>
+        <mapping class="edu.uw.css553.backend.entities.Tool" resource="Tool.hbm.xml"/>
+        <mapping class="edu.uw.css553.backend.entities.ToolParameter" resource="ToolParameter.hbm.xml"/>
         <mapping class="edu.uw.css553.backend.entities.Workflow" resource="Workflow.hbm.xml"/>
-
+        <mapping class="edu.uw.css553.backend.entities.WorkflowParameter" resource="WorkflowParameter.hbm.xml"/>
+        <mapping resource="Project.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

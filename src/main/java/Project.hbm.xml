@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="edu.uw.css553.backend.entities.Project" table="project">
+        <id name="id" type="string" column="ProjectId"/>
+        <property name="name" type="string" column="ProjectName"/>
+        <property name="leadName" type="string" column="ProjectLeadName"/>
+        <property name="description" type="string" column="ProjectDescription"/>
+        <property name="createdBy" type="string" column="CreatedBy"/>
+        <property name="creationTime" type="timestamp" column="CreationTime"/>
+        <property name="modifiedBy" type="string" column="ModifiedBy"/>
+        <property name="modificationTime" type="timestamp" column="ModificationTime"/>
+        <property name="version" type="integer" column="Version"/>
+
+    </class>
+</hibernate-mapping>
