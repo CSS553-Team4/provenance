@@ -20,17 +20,21 @@ import java.util.*;
  * @author Zulqurnain Hussain
  */
 public class ProvenanceCli {
-    private static SessionFactory factory;
+    public static SessionFactory factory;
     public static void main(String[] args) {
         boolean quitProgram = false;
 
         Configuration cfg = new Configuration();
+        cfg.addFile("hibernate.cfg.xml");
         cfg.addResource("WorkflowParameter.hbm.xml");
         cfg.addResource("Action.hbm.xml");
         cfg.addResource("Workflow.hbm.xml");
         cfg.addResource("LogParameter.hbm.xml");
         cfg.addResource("LogStep.hbm.xml");
         cfg.addResource("ExecutionLog.hbm.xml");
+        cfg.addResource("ToolParameter.hbm.xml");
+        cfg.addResource("Tool.hbm.xml");
+        cfg.addResource("Project.hbm.xml");
         cfg.setProperties(System.getProperties());
 
         try {
@@ -144,6 +148,7 @@ public class ProvenanceCli {
                                 System.out.print(e.getName() + " ");
                             }
                             session.update(ga);
+                            tx.commit();
                             System.out.println("\nAre you done adding to the workflow y|n: ");
                             String choice1 = in.nextLine();
                             if (choice1.matches("[Yy].*") == true) {
@@ -201,7 +206,6 @@ public class ProvenanceCli {
         }
         finally {
             session.update(workflow);
-            tx.commit();
             session.close();
         }
     }

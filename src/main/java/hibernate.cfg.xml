@@ -32,6 +32,5 @@
         <mapping class="edu.uw.css553.backend.entities.ToolParameter" resource="ToolParameter.hbm.xml"/>
         <mapping class="edu.uw.css553.backend.entities.Workflow" resource="Workflow.hbm.xml"/>
         <mapping class="edu.uw.css553.backend.entities.WorkflowParameter" resource="WorkflowParameter.hbm.xml"/>
-        <mapping resource="Project.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

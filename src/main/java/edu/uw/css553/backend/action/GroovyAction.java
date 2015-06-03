@@ -1,5 +1,6 @@
-package edu.uw.css553.backend.entities;
+package edu.uw.css553.backend.action;
 
+import edu.uw.css553.backend.entities.Action;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 
@@ -24,7 +25,7 @@ public class GroovyAction extends Action {
 
     String scriptText;
 
-    GroovyAction () {
+    public GroovyAction() {
         name = "Groovy";
     }
 
