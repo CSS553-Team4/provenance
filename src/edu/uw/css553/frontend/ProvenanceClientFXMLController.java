@@ -290,7 +290,7 @@ public class ProvenanceClientFXMLController {
      */
     void populateActionList() {
 
-        String topLevelDir = System.getProperty("user.dir") + "\\src\\edu\\uw\\css553\\backend\\actions";
+        String topLevelDir = System.getProperty("user.dir") + "\\Actions";
         File dir = new File(topLevelDir);
         List<String> actionList;
         Class actionInitializer;
