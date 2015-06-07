@@ -224,6 +224,8 @@ public class ProvenanceClientFXMLController {
      */
     @FXML
     void openWorkflow(ActionEvent event) {
+    	
+    	// remove current workflow, if any
         WorkflowFlowPane.getChildren().clear();
         WorkflowActionNodes.clear();
         holder[0] = null;
@@ -277,6 +279,8 @@ public class ProvenanceClientFXMLController {
             event.consume();
             return;
         }
+        
+        System.out.println( "The path file path to save is: " + file.getPath() );
         manager.saveWorkflow(workflow, file.getPath());
         
     }
@@ -349,7 +353,7 @@ public class ProvenanceClientFXMLController {
             rectangle = new Rectangle(500, 200);
             rectangle.setFill(lg1);
             parameter1 = new TextField("scriptText");
-            parameter2 = new TextField("InputVal");
+            parameter2 = new TextField("input");
             Text Nodename = new Text(name);
             select = new Button("Select");
             Lister = new VBox(5.0, Nodename, parameter1, parameter2,select);
