@@ -1,21 +1,34 @@
 package edu.uw.css553.backend.entities;
 
-import javax.persistence.Id;
-import javax.persistence.Basic;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import edu.uw.css553.backend.entities.LogParameter;
 
 /**
- * Created by clbur_000 on 5/25/2015.
+ * @author Christina Burnett
+ * @version 1.0 5/30/2015
  */
 @Entity
 public class LogStep implements EntityInterface{
     @Id
     private String id;
     @Basic
+    private String logId;
+    @Basic
+    private String name;
+    @Basic
     private int sequence;
     @Basic
     private String outputURL;
+    @Basic
+    private Timestamp executionStartTime;
+    @Basic
+    private Timestamp executionEndTime;
+    @Basic
+    private String returnValue;
+    @Basic
+    private String returnMessage;
     @Basic
     private String createdBy;
     @Basic
@@ -26,6 +39,8 @@ public class LogStep implements EntityInterface{
     private Timestamp modificationTime;
     @Basic
     private int version;
+    @OneToMany
+    private ArrayList<LogParameter> params;
 
     @Override
     public String getId() {
@@ -61,8 +76,36 @@ public class LogStep implements EntityInterface{
         return sequence;
     }
 
+    public String getLogId() {
+        return logId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public String getOutputURL() {
         return outputURL;
+    }
+
+    public Timestamp getExecutionStartTime() {
+        return executionStartTime;
+    }
+
+    public Timestamp getExecutionEndTime() {
+        return executionEndTime;
+    }
+
+    public String getReturnValue() {
+        return returnValue;
+    }
+
+    public String getReturnMessage() {
+        return returnMessage;
+    }
+
+    public ArrayList<LogParameter> getParams() {
+        return params;
     }
 
     public void setId(String id) {
@@ -93,7 +136,35 @@ public class LogStep implements EntityInterface{
         this.sequence = sequence;
     }
 
+    public void setLogId(String logId) {
+        this.logId = logId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setOutputURL(String outputURL) {
         this.outputURL = outputURL;
+    }
+
+    public void setExecutionStartTime(Timestamp executionStartTime) {
+        this.executionStartTime = executionStartTime;
+    }
+
+    public void setExecutionEndTime(Timestamp executionEndTime) {
+        this.executionEndTime = executionEndTime;
+    }
+
+    public void setReturnValue(String returnValue) {
+        this.returnValue = returnValue;
+    }
+
+    public void setReturnMessage(String returnMessage) {
+        this.returnMessage = returnMessage;
+    }
+
+    public void setParams(ArrayList<LogParameter> params) {
+        this.params = params;
     }
 }
