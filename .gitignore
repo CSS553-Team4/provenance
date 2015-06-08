@@ -3,5 +3,8 @@
 *.iml
 .IntelliJIdea14
 
+#Eclipse
+.metadata
+
 # Compiler output
 out/
