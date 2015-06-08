@@ -5,7 +5,9 @@
 <hibernate-mapping>
     <class name="edu.uw.css553.backend.entities.LogStep" table="logstep">
         <id name="id" type="string" column="LogStepId"/>
+        <property name="logId" type="string" column="LogId"/>
         <property name="sequence" type="integer" column="StepSequence"/>
+        <property name="name" type="string" column="Name"/>
         <property name="outputURL" type="string" column="OutputURL"/>
         <property name="createdBy" type="string" column="CreatedBy"/>
         <property name="creationTime" type="timestamp" column="CreationTime"/>
